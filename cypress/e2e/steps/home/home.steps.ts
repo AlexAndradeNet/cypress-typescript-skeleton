@@ -7,8 +7,8 @@ Given('User must launch home page', () => {
 
 Given('User must search {string}', (text: string) => {
     cy.wrap(text).as('searchedValue');
-    cy.get(HomePage.searchButton()).click({ force: true });
-    cy.get(HomePage.searchTextbox()).should('be.visible').type(text);
+    cy.get(HomePage.searchButton()).click();
+    cy.get(HomePage.searchTextbox()).type(text);
     cy.get(HomePage.searchSubmitButton()).click();
 });
 
@@ -17,5 +17,5 @@ When('User must open the newsletter page', () => {
 });
 
 Then('Should display Home page', () => {
-    cy.get(HomePage.searchButton()).click({ force: true });
+    cy.get(HomePage.searchButton()).click();
 });
