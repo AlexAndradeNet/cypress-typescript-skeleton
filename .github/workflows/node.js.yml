@@ -1,6 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: build
 
 on:
@@ -9,6 +6,7 @@ on:
     pull_request: # Trigger on pull requests to any branch
 
 jobs:
+    # Build Job
     build:
         runs-on: ubuntu-latest
 
@@ -25,10 +23,67 @@ jobs:
             -   name: Install dependencies
                 run: npm install
 
+            -   name: Cache node_modules
+                uses: actions/cache@v3
+                with:
+                    path: node_modules
+                    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-node-
+
+            -   name: Archive workspace
+                run: zip -r9 workspace.zip ./* # Compress the workspace into a zip file
+
+            -   name: Save workspace
+                uses: actions/upload-artifact@v3
+                with:
+                    name: workspace
+                    path: workspace.zip # Upload the zip file
+
+    # Lint Job
+    lint:
+        runs-on: ubuntu-latest
+        needs: build # This job depends on the build job
+
+        steps:
+            -   name: Restore workspace
+                uses: actions/download-artifact@v3
+                with:
+                    name: workspace
+                    path: .
+
+            -   name: Extract workspace
+                run: unzip workspace.zip # Extract the workspace from the zip file
+
+            -   name: Set up Node.js (setup-node respects cache)
+                uses: actions/setup-node@v4
+                with:
+                    node-version: '18'
+                    cache: 'npm' # Reuses the npm cache set up in build job
+
             -   name: Run Spotless/Linter check
                 run: npm run lint-ci
-                continue-on-error: false
+
+    # Test Job
+    test:
+        runs-on: ubuntu-latest
+        needs: lint # This job depends on the lint job
+
+        steps:
+            -   name: Restore workspace
+                uses: actions/download-artifact@v3
+                with:
+                    name: workspace
+                    path: .
+
+            -   name: Extract workspace
+                run: unzip workspace.zip # Extract the workspace from the zip file
+
+            -   name: Set up Node.js (setup-node respects cache)
+                uses: actions/setup-node@v4
+                with:
+                    node-version: '18'
+                    cache: 'npm' # Reuses the npm cache set up in build job
 
             -   name: Run tests
                 run: npm run test
-                if: success()
