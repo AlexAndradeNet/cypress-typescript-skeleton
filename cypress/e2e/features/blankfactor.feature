@@ -3,7 +3,6 @@ Feature: Blankfactor Test
     Background:
         Given User must launch home page
 
-        @skip
     Scenario: User is able to subscribe to the Newsletter
         When User must open the newsletter page
         Then User should be able to subscribe to the Newsletter

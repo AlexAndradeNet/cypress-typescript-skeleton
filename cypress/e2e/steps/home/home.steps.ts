@@ -13,7 +13,7 @@ Given('User must search {string}', (text: string) => {
 });
 
 When('User must open the newsletter page', () => {
-    cy.findByRole('link', { name: `${HomePage.newsletterLink()}` }).click();
+    cy.findByRole('link', { name: HomePage.newsletterLink() }).click();
 });
 
 Then('Should display Home page', () => {
