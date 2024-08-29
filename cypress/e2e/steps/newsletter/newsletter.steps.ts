@@ -1,6 +1,6 @@
 import { Then } from '@badeball/cypress-cucumber-preprocessor';
 import NewsletterPage from '../../pages/newsletter/newsletter-page';
-import { generateRandomEmail } from '../../../support/utils/commonFunctions';
+import generateRandomEmail from '../../../support/utils/commonFunctions';
 
 Then('User should be able to subscribe to the Newsletter', () => {
     cy.iframe().within($iframe => {

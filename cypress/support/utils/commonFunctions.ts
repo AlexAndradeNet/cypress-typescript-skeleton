@@ -1,16 +1,21 @@
-export function generateRandomNumber(size: number): number {
-    return Math.floor(Math.random() * size);
-}
+export default function generateRandomEmail(): string {
+    // Function to generate a random string using Web Crypto API
+    function generateRandomString(length: number): string {
+        const chars: string = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        const randomValues: Uint8Array = new Uint8Array(length); // Create a typed array of random values
+        window.crypto.getRandomValues(randomValues); // Fill the array with random values
 
-export function generateRandomString(size: number): string {
-    return Math.random()
-        .toString(36)
-        .replace(/[^a-z]+/g, '')
-        .substring(0, size);
-}
+        let result: string = '';
+        for (let i: number = 0; i < length; i++) {
+            // Use random values to select characters from the chars string
+            result += chars.charAt(randomValues[i] % chars.length);
+        }
+        return result;
+    }
 
-export function generateRandomEmail(): string {
-    return `test+${generateRandomString(5)}+${generateRandomNumber(
-        100000
-    )}@gmail.com`;
+    const localPart: string = generateRandomString(8);
+    const domain: string = generateRandomString(5);
+    const tld: string = 'com';
+
+    return `${localPart}@${domain}.${tld}`;
 }
