@@ -14,8 +14,8 @@ export default function generateRandomEmail(): string {
     }
 
     const localPart: string = generateRandomString(8);
-    const domain: string = generateRandomString(5);
+    const domain: string = 'gmail';
     const tld: string = 'com';
 
-    return `${localPart}@${domain}.${tld}`;
+    return `test-${localPart}@${domain}.${tld}`;
 }
