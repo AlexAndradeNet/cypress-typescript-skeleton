@@ -22,8 +22,8 @@ jobs:
                     node-version: '18'
                     cache: 'npm'
 
-            -   name: Install dependencies
-                run: npm install
+            -   name: Install dependencies fast
+                run: npm ci
 
             -   name: Run Spotless/Linter check
                 run: npm run lint-ci
