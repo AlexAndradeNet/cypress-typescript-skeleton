@@ -8,6 +8,9 @@ const {
 const { createEsbuildPlugin } = require('@badeball/cypress-cucumber-preprocessor/esbuild');
 
 module.exports = defineConfig({
+    defaultCommandTimeout: 10000,
+    viewportWidth: 1200,
+    viewportHeight: 1000,
     e2e: {
         specPattern: '**/*.feature',
         async setupNodeEvents(

@@ -1,6 +1,6 @@
 class NewsletterPage {
     static emailInput(): string {
-        return '[name="email"]';
+        return '[placeholder="Escribe tu correo electrónico..."]';
     }
 
     static submitButton(): string {

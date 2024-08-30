@@ -34,7 +34,7 @@ jobs:
 
             # Upload Cypress Screenshots as Artifacts
             -   name: Upload Cypress Screenshots
-                if: always()
+                if: ${{ failure() }}  # Upload only if tests fail
                 uses: actions/upload-artifact@v3
                 with:
                     name: cypress-screenshots
