@@ -31,4 +31,11 @@ jobs:
 
             -   name: Run tests
                 run: npm run test
-                if: success()
+
+            # Upload Cypress Screenshots as Artifacts
+            -   name: Upload Cypress Screenshots
+                if: always()
+                uses: actions/upload-artifact@v3
+                with:
+                    name: cypress-screenshots
+                    path: cypress/screenshots
