@@ -21,6 +21,7 @@ class HomePage {
 
     clickOnSearchButton(): HomePage {
         cy.get(HomePage.searchButton()).click();
+        cy.get('#header-search').invoke('css', 'display', 'block');
         return this;
     }
 
