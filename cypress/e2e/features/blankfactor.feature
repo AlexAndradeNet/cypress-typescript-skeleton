@@ -7,6 +7,7 @@ Feature: Blankfactor Test
         When User must open the newsletter page
         Then User should be able to subscribe to the Newsletter
 
+
     Scenario: Search post about "Reed Jobs"
         When User must search "Reed Jobs"
         And User must open the top result of the search
