@@ -23,6 +23,7 @@
         "strictPropertyInitialization": true, // Ensures class properties are initialized properly
         "noImplicitThis": true, // Raises an error on expressions with an implied 'any' type for 'this'
         "alwaysStrict": true // Ensures that all code is parsed in strict mode and emits "use strict" in each source file
+        "baseUrl": ".",
     },
     "exclude": ["node_modules"] // Excludes the node_modules directory
 }

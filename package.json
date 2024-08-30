@@ -22,13 +22,13 @@
     "author": "Alex Andrade",
     "license": "ISC",
     "dependencies": {
-        "cypress": "^13.14.0",
+        "cypress": "^13.14.1",
         "cypress-iframe": "^1.0.1",
         "@testing-library/cypress": "^10.0.2",
-        "@badeball/cypress-cucumber-preprocessor": "^20.1.2"
+        "@badeball/cypress-cucumber-preprocessor": "^20.1.2",
+        "@bahmutov/cypress-esbuild-preprocessor": "^2.2.2"
     },
     "devDependencies": {
-        "@bahmutov/cypress-esbuild-preprocessor": "^2.2.2",
         "@types/eslint__js": "^8.42.3",
         "@types/node": "^22.5.0",
         "@typescript-eslint/eslint-plugin": "^7.18.0",
