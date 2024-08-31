@@ -2,8 +2,9 @@
     "compilerOptions": {
         "target": "ES2023",
         // Sets the target ECMAScript version
-        "module": "commonjs",
+        "module": "ESNext",
         // Sets the module system
+        "moduleResolution": "node",
         "outDir": "./dist",
         // Specifies the output directory for compiled files
         "rootDir": "./cypress",
@@ -33,7 +34,12 @@
         // Allows importing JSON files as modules
         "isolatedModules": true,
         // Ensures each file can be safely transpiled without relying on other files
-        "types": ["node", "cypress", "@testing-library/cypress"],
+        "types": [
+            "node",
+            "cypress",
+            "@testing-library/cypress",
+            "@badeball/cypress-cucumber-preprocessor"
+        ],
         // Includes type definitions for Node.js and Cypress
         "strictNullChecks": true,
         // Ensures null and undefined are handled explicitly
