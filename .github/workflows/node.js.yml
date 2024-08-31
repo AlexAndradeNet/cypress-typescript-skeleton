@@ -22,7 +22,19 @@ jobs:
                     node-version: '18'
                     cache: 'npm'
 
-            -   name: Install dependencies fast
+            -   name: Cache npm dependencies
+                # The cache is only refreshed when the lock file changes,
+                # leading to better cache reuse.
+                uses: actions/cache@v4
+                id: cache-primes
+                with:
+                    path: ~/.npm
+                    key: npm-cache-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+                    restore-keys: |
+                        npm-cache-${{ runner.os }}-
+
+            -   name: Install dependencies if needed
+                if: steps.cache-primes.outputs.cache-hit != 'true'
                 run: npm ci
 
             -   name: Run Spotless/Linter check
@@ -33,9 +45,9 @@ jobs:
                 run: npm run test
 
             # Upload Cypress Screenshots as Artifacts
-            -   name: Upload Cypress Screenshots
+            -   name: Upload Cypress Screenshots on errors
                 if: ${{ failure() }}  # Upload only if tests fail
-                uses: actions/upload-artifact@v3
+                uses: actions/upload-artifact@v4
                 with:
                     name: cypress-screenshots
                     path: cypress/screenshots
