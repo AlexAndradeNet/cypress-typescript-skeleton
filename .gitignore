@@ -48,3 +48,6 @@ yarn-error.log*
 
 # SonarQube
 .scannerwork/
+
+# Cypress
+screenshots/

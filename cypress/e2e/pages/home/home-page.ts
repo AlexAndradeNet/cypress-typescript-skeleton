@@ -1,9 +1,6 @@
 class HomePage {
     static searchButton(): string {
         return '#search-toggle';
-        // return '.search-icon > .svg-icon';
-        // return '.search-icon';
-        // return '.svg-icon';
     }
 
     static homeLogo(): string {
@@ -20,6 +17,27 @@ class HomePage {
 
     static newsletterLink(): string {
         return 'Newsletter';
+    }
+
+    clickOnSearchButton(): HomePage {
+        cy.get(HomePage.searchButton()).click();
+        cy.get('#header-search').invoke('css', 'display', 'block');
+        return this;
+    }
+
+    typeOnSearchTextbox(text: string): HomePage {
+        cy.get(HomePage.searchTextbox()).type(text);
+        return this;
+    }
+
+    clickOnSubmitSearchButton(): HomePage {
+        cy.get(HomePage.searchSubmitButton()).click();
+        return this;
+    }
+
+    clickOnNewsletterLink(): HomePage {
+        cy.findByRole('link', { name: HomePage.newsletterLink() }).click();
+        return this;
     }
 }
 
