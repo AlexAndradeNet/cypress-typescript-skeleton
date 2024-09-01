@@ -1,8 +1,24 @@
 {
+    "nonGlobalStepDefinitions": true,
     "stepDefinitions": [
         "cypress/e2e/[filepath]/**/*.ts",
         "cypress/e2e/[filepath].ts",
         "cypress/support/step_definitions/**/*.ts",
         "cypress/e2e/steps/**/*.ts"
-    ]
+    ],
+    "json": {
+        "enabled": true,
+        "output": "./.run/reports/cucumber-json/report.json"
+    },
+    "html": {
+        "enabled": true,
+        "output": "./.run/reports/cucumber-html/basic.html"
+    },
+    "pretty": {
+        "enabled": false
+    },
+    "messages": {
+        "enabled": true,
+        "output": "./.run/reports/cucumber-json/messages.ndjson"
+    }
 }
