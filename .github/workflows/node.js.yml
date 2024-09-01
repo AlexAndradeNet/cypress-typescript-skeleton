@@ -42,12 +42,12 @@ jobs:
                 continue-on-error: false
 
             -   name: Run tests
-                run: npm run test
+                run: npm run test:all
 
-            # Upload Cypress Screenshots as Artifacts
-            -   name: Upload Cypress Screenshots on errors
-                if: ${{ failure() }}  # Upload only if tests fail
+            # Upload Cypress Reports as Artifacts
+            -   name: Upload Cypress Reports
+                if: always()  # Run always regardless of previous step results
                 uses: actions/upload-artifact@v4
                 with:
-                    name: cypress-screenshots
-                    path: cypress/screenshots
+                    name: cypress-reports
+                    path: .run/reports

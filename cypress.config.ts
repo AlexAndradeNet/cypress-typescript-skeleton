@@ -1,6 +1,10 @@
 import { defineConfig } from 'cypress';
+import { writeFileSync } from 'fs';
 import createBundler from '@bahmutov/cypress-esbuild-preprocessor';
-import { addCucumberPreprocessorPlugin } from '@badeball/cypress-cucumber-preprocessor';
+import {
+    addCucumberPreprocessorPlugin,
+    afterRunHandler,
+} from '@badeball/cypress-cucumber-preprocessor';
 import { createEsbuildPlugin } from '@badeball/cypress-cucumber-preprocessor/esbuild';
 
 export default defineConfig({
@@ -22,6 +26,24 @@ export default defineConfig({
                 createBundler({
                     plugins: [createEsbuildPlugin(config)],
                 })
+            );
+
+            on(
+                'after:run',
+                async (
+                    results:
+                        | CypressCommandLine.CypressRunResult
+                        | CypressCommandLine.CypressFailedRunResult
+                ): Promise<void> => {
+                    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+                    if (results) {
+                        await afterRunHandler(config);
+                        writeFileSync(
+                            '.run/reports/results.json',
+                            JSON.stringify(results)
+                        );
+                    }
+                }
             );
 
             return config;

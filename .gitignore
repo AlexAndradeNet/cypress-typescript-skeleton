@@ -50,4 +50,10 @@ yarn-error.log*
 .scannerwork/
 
 # Cypress
-screenshots/
+cypress/results/
+cypress/cucumber-report
+cypress/cucumber-json
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+.run/
