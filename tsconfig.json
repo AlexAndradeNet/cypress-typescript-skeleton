@@ -7,8 +7,13 @@
         "moduleResolution": "node",
         "outDir": "./dist",
         // Specifies the output directory for compiled files
-        "rootDir": "./cypress",
+        "rootDir": "./",
         // Specifies the root directory of input files
+        "paths": {
+            "@badeball/cypress-cucumber-preprocessor/*": [
+                "./node_modules/@badeball/cypress-cucumber-preprocessor/dist/subpath-entrypoints/*"
+            ]
+        },
         "esModuleInterop": true,
         // Enables emit interoperability between CommonJS and ES Modules
         "baseUrl": ".",
